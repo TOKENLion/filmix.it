@@ -1,0 +1,15 @@
+{% for actor in actors %}
+    <tr>
+        <th scope="row">{{ actor.id }}</th>
+        <td>{{ actor.name }}</td>
+        <td>{{ actor.email }}</td>
+        <td>{{ actor.phone }}</td>
+        <td>
+            <ul>
+                {% for film in actor.films %}
+                    <li>{{ film.name }}</li>
+                {% endfor %}
+            </ul>
+        </td>
+    </tr>
+{% endfor %}

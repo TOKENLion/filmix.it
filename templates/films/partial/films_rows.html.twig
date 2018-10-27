@@ -1,0 +1,18 @@
+{% for film in films %}
+<tr>
+    <th scope="row">{{ film.id }}</th>
+    <td>{{ film.name }}</td>
+    <td>{{ film.genre }}</td>
+    <td>{{ film.dateCreate|date('M d, Y') }}</td>
+    <td>{{ film.studio.name }}</td>
+    <td>{{ film.studio.phone }}</td>
+    <td>{{ film.studio.address }}</td>
+    <td>
+        <ul>
+            {% for actor in film.actors %}
+                <li>{{ actor.name }}</li>
+            {% endfor %}
+        </ul>
+    </td>
+</tr>
+{% endfor %}
