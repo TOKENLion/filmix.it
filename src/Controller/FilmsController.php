@@ -13,10 +13,25 @@ class FilmsController extends Controller
     /**
      * @Route("/", name="films")
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
+        $search = trim($search);
+
         $repository = $this->getDoctrine()->getRepository(Film::class);
-        $films = $repository->findFilmsByConditions();
+        $all_films = $repository->findFilmsByConditions(['search' => $search]);
+        $paginator = $this->get('knp_paginator');
+
+        $films = $paginator->paginate(
+            $all_films,
+            $request->query->getInt('page', 1),
+            5,
+            [
+                'align' => 'center',
+                'size' => 'small'
+            ]
+        );
+
         return $this->render('films/index.html.twig', ['films' => $films]);
     }
 
