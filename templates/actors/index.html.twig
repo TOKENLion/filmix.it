@@ -5,39 +5,19 @@
 
 {% block body %}
     <main role="main" class="container">
-        <h2 class="mt-5 mb-5 text-center">Actors and their films!</h2>
-        <div class="row">
-            <div class="col">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search for recordings by actor name, email, phone or film name" data-button="#button-search-actors">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" id="button-search-actors" type="button" data-href="{{ path('search_actor') }}">
-                            Search
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row">
-            <div class="col">
-
-                <table class="table table-hover mt-3">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col" class="text-center">Actor Name</th>
-                            <th scope="col" class="text-center">Email</th>
-                            <th scope="col" class="text-center">Phone</th>
-                            <th scope="col" class="text-center">Films</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-actors-rows">
-                        {{ include('actors/partial/actors_rows.html.twig', { 'actors': actors }) }}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <h2 class="mt-5 mb-5 text-center">
+            Actors and their films!
+        </h2>
+        <table class="table table-hover" id="actors" data-href="{{ path('ajax_actors') }}">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="text-center">Actor Name</th>
+                <th scope="col" class="text-center">Email</th>
+                <th scope="col" class="text-center">Phone</th>
+                <th scope="col" class="text-center">Films</th>
+            </tr>
+            </thead>
+        </table>
     </main>
 {% endblock %}

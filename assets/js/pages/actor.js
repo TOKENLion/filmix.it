@@ -1,28 +1,18 @@
 $(function(){
-    $('#button-search-actors').on('click', function () {
-        let btn = $(this),
-            inputSearch = $("input[name='search']");
-
-        $.ajax({
-            method: 'POST',
-            dataType: 'JSON',
-            url: btn.data('href'),
-            data: { search: inputSearch.val()},
-            success: function (response) {
-                removeLoader();
-                if (response.status === 'success' && typeof response.content != "undefined") {
-                    $("#table-actors-rows").html(response.content);
-                } else {
-                    toastr[response.status](response.message);
-                }
-            },
-            beforeSend: function () {
-                loader($(".table-hover").closest("div"));
-            },
-            error: function () {
-                toastr['warning']('Please try again later!');
-                removeLoader();
-            }
-        });
-    })
+    $('#actors').DataTable({
+        serverSide: true,
+        ajax: {
+            "url": $('#actors').data('href'),
+            "type": "POST",
+        },
+        "order": [[ 0, "asc" ]],
+        "lengthMenu": [[5, 10, 25, 50], [5, 10, 25, 50]],
+        "columns": [
+            { "orderable": true },
+            { "orderable": false },
+            { "orderable": true },
+            { "orderable": true },
+            { "orderable": false }
+        ]
+    });
 })

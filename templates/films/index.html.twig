@@ -4,47 +4,23 @@
 {% block active_films %}active{% endblock %}
 
 {% block body %}
-<main role="main" class="container">
-    <h2 class="mt-5 mb-5 text-center">Films and their film studios as well as actors who participated in films!</h2>
-    {#<div class="row">#}
-        {#<div class="col">#}
-            {#<div class="input-group">#}
-                {#<input type="text" class="form-control" name="search" placeholder="Search for recordings by movie title, movie genre, film studio name or actor name" data-button="#button-search-films">#}
-                {#<div class="input-group-append">#}
-                    {#<button class="btn btn-outline-secondary" id="button-search-films" type="button" data-href="{{ path('search_film') }}">#}
-                        {#Search#}
-                    {#</button>#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
-    {#</div>#}
-
-
-    <div class="row">
-        <div class="col">
-            <table class="table table-hover mt-3">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Name', 'name') }}</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Genre', 'genre') }}</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Film Date', 'dateCreate') }}</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Studio Name', 'studio.name') }}</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Studio Phone', 'studio.phone') }}</th>
-                        <th scope="col" class="text-center">{{ knp_pagination_sortable(films, 'Studio Address', 'studio.address') }}</th>
-                        <th scope="col" class="text-center">Actors</th>
-                    </tr>
-                </thead>
-                <tbody id="table-films-rows">
-                    {{ include('films/partial/films_rows.html.twig', { 'films': films }) }}
-                </tbody>
-            </table>
-            {#{{ films.getTotalItemCount }}#}
-            <div class="navigation">
-                {#knp_pagination_render(films, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig')#}
-                {{ knp_pagination_render(films, '@KnpPaginator/Pagination/twitter_bootstrap_v4_pagination.html.twig') }}
-            </div>
-        </div>
-    </div>
-</main>
+    <main role="main" class="container">
+        <h2 class="mt-5 mb-5 text-center">
+            Films and their film studios as well as actors who participated in films!
+        </h2>
+        <table class="table table-hover" id="films" data-href="{{ path('ajax_films') }}">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="text-center">Name</th>
+                <th scope="col" class="text-center">Genre</th>
+                <th scope="col" class="text-center">Film Date</th>
+                <th scope="col" class="text-center">Studio Name</th>
+                <th scope="col" class="text-center">Studio Phone</th>
+                <th scope="col" class="text-center">Studio Address</th>
+                <th scope="col" class="text-center">Actors</th>
+            </tr>
+            </thead>
+        </table>
+    </main>
 {% endblock %}

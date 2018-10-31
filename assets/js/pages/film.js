@@ -1,33 +1,21 @@
 $(function(){
-    $('#button-search-films').on('click', function () {
-        let btn = $(this),
-            inputSearch = $("input[name='search']");
-
-        $.ajax({
-            method: 'POST',
-            dataType: 'JSON',
-            url: btn.data('href'),
-            data: { search: inputSearch.val()},
-            success: function (response) {
-                removeLoader();
-                if (response.status === 'success' && typeof response.content != "undefined") {
-                    $("#table-films-rows").html(response.content);
-                } else {
-                    toastr[response.status](response.message);
-                }
-            },
-            beforeSend: function () {
-                loader($(".table-hover").closest("div"));
-            },
-            error: function () {
-                toastr['warning']('Please try again later!');
-                removeLoader();
-            }
-        });
-    });
-
-    $('#users').DataTable({
+    $('#films').DataTable({
         serverSide: true,
-        ajax: $('#users').data('href')
+        ajax: {
+            "url": $('#films').data('href'),
+            "type": "POST",
+        },
+        "order": [[ 0, "asc" ]],
+        "lengthMenu": [[5, 10, 25, 50], [5, 10, 25, 50]],
+        "columns": [
+            { "orderable": true },
+            { "orderable": true },
+            { "orderable": true },
+            { "orderable": false },
+            { "orderable": false },
+            { "orderable": true },
+            { "orderable": false },
+            { "orderable": false }
+        ]
     });
 })

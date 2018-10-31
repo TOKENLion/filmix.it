@@ -49,15 +49,36 @@ class FilmRepository extends ServiceEntityRepository
 
         if (!empty($conditions['length'])) {
             $request->setFirstResult($conditions['start'])
-                ->setMaxResults($conditions['length']);
+                    ->setMaxResults($conditions['length']);
         }
 
         return $request
             ->join('f.studio', 'fs')
             ->join('f.actors', 'a')
+            ->groupBy('f.id')
             ->orderBy($order_column, $order_dir)
             ->getQuery()
             ->getResult();
+    }
+
+    public function getCountFilmsByConditions($conditions = [])
+    {
+        $request = $this->createQueryBuilder('f')->select('COUNT(DISTINCT f.id)');
+
+        if (isset($conditions['search'])) {
+            $request->andWhere('(
+                    f.name  LIKE :val OR
+                    f.genre LIKE :val OR 
+                    fs.name LIKE :val OR
+                    a.name  LIKE :val)')
+                ->setParameter('val', "%{$conditions['search']}%");
+        }
+
+        return $request
+            ->join('f.studio', 'fs')
+            ->join('f.actors', 'a')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 
 //    /**
