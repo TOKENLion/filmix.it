@@ -19,19 +19,19 @@ class FilmRepository extends ServiceEntityRepository
         parent::__construct($registry, Film::class);
     }
 
+    public function getTotalFilms()
+    {
+        return $this->createQueryBuilder('f')
+            ->select('COUNT(f.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function findFilmsByConditions($conditions = [])
     {
+        $order_column = 'f.id';
+        $order_dir = 'ASC';
         $request = $this->createQueryBuilder('f');
-
-//        if (isset($conditions['film_name'])) {
-//            $request->andWhere('f.name = :film_name')
-//                    ->setParameter('film_name', $conditions['film_name']);
-//        }
-//
-//        if (isset($conditions['genre'])) {
-//            $request->andWhere('f.genre = :genre')
-//                    ->setParameter('genre', $conditions['genre']);
-//        }
 
         if (isset($conditions['search'])) {
             $request->andWhere('(
@@ -39,13 +39,23 @@ class FilmRepository extends ServiceEntityRepository
                     f.genre LIKE :val OR 
                     fs.name LIKE :val OR
                     a.name  LIKE :val)')
-                    ->setParameter('val', "%{$conditions['search']}%");
+                ->setParameter('val', "%{$conditions['search']}%");
+        }
+
+        if (!empty($order_column)) {
+            $order_column = $conditions['order_column'];
+            $order_dir = $conditions['order_dir'];
+        }
+
+        if (!empty($conditions['length'])) {
+            $request->setFirstResult($conditions['start'])
+                ->setMaxResults($conditions['length']);
         }
 
         return $request
             ->join('f.studio', 'fs')
             ->join('f.actors', 'a')
-            ->orderBy('f.id', 'ASC')
+            ->orderBy($order_column, $order_dir)
             ->getQuery()
             ->getResult();
     }

@@ -24,5 +24,10 @@ $(function(){
                 removeLoader();
             }
         });
-    })
+    });
+
+    $('#users').DataTable({
+        serverSide: true,
+        ajax: $('#users').data('href')
+    });
 })

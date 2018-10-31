@@ -16,6 +16,9 @@ require('bootstrap');
 // Alert plugin
 window.toastr = require('toastr/build/toastr.min');
 
+// window.dt = require('datatables.net/js/jquery.dataTables');
+window.dt = require('datatables.net-bs4/js/dataTables.bootstrap4.min');
+
 // Custom elements
 require('./additional/custom');
 

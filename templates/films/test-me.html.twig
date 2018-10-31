@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Films{% endblock %}
+{% block active_films %}active{% endblock %}
+
+{% block body %}
+<main role="main" class="container">
+    <h2 class="mt-5 mb-5 text-center">Films and their film studios as well as actors who participated in films!</h2>
+    <table class="table table-hover" id="users" data-href="{{ path('users') }}">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Genre</th>
+                <th>Film Date</th>
+                <th>Studio Name</th>
+                <th>Studio Phone</th>
+                <th>Studio Address</th>
+                <th>Actors</th>
+            </tr>
+        </thead>
+    </table>
+</main>
+{% endblock %}
