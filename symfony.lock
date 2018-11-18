@@ -89,8 +89,14 @@
     "egulias/email-validator": {
         "version": "2.1.6"
     },
+    "facebook/webdriver": {
+        "version": "1.6.0"
+    },
     "fig/link-util": {
         "version": "1.0.0"
+    },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
     },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
@@ -147,9 +153,6 @@
         "version": "v3.4.17"
     },
     "symfony/cache": {
-        "version": "v3.4.17"
-    },
-    "symfony/class-loader": {
         "version": "v3.4.17"
     },
     "symfony/config": {
@@ -266,6 +269,9 @@
     "symfony/orm-pack": {
         "version": "v1.0.5"
     },
+    "symfony/panther": {
+        "version": "v0.2.0"
+    },
     "symfony/phpunit-bridge": {
         "version": "4.1",
         "recipe": {
@@ -275,14 +281,14 @@
             "ref": "b14c7f62fabeedf256d3211b0f704402b5530ba1"
         }
     },
-    "symfony/polyfill-apcu": {
-        "version": "v1.9.0"
-    },
     "symfony/polyfill-intl-icu": {
         "version": "v1.9.0"
     },
     "symfony/polyfill-mbstring": {
         "version": "v1.9.0"
+    },
+    "symfony/polyfill-php72": {
+        "version": "v1.10.0"
     },
     "symfony/process": {
         "version": "v3.4.17"
